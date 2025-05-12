@@ -8,7 +8,7 @@ const { log, error } = labeledLogger();
 // --- declare some callbacks ---
 
 const getContactInfo = (user) => {
-    // write me!
+  return `${user.id}, Hi, your name is ${user.name}`;
 };
 
 const handleError = (err) => error(err);
@@ -17,27 +17,30 @@ const handleError = (err) => error(err);
 
 log('fetching and processing user 2');
 fetchUserById(2)
-    .then((user) => getContactInfo(user))
-    // "2: Shana@melissa.tv, 010-692-6593 x09125, anastasia.net"
-    .then((contactInfo) => log(contactInfo))
-    .catch((err) => error(err));
+  .then((user) => getContactInfo(user))
+  // "2: Shana@melissa.tv, 010-692-6593 x09125, anastasia.net"
+  .then((contactInfo) => log(contactInfo))
+  .catch((err) => error(err));
 
 log('fetching and processing user 5');
 fetchUserById(5)
-    .then(getContactInfo)
-    // "5: Lucio_Hettinger@annie.ca, (254)954-1289, demarco.info"
-    .then(_)
-    .catch(_);
+  .then(getContactInfo)
+  // "5: Lucio_Hettinger@annie.ca, (254)954-1289, demarco.info"
+  .then((contactInfo) => log(contactInfo))
+  .catch(handleError);
 
 log('fetching and processing user 7');
 fetchUserById(7)
-    ._(_)
-    // "7: Telly.Hoeger@billy.biz, 210.067.6132, elvis.io"
-    ._(_)
-    ._(_);
+  .then(getContactInfo)
+  // "7: Telly.Hoeger@billy.biz, 210.067.6132, elvis.io"
+  .then((contactInfo) => log(contactInfo))
+  .catch(handleError);
 
 log('fetching and processing user 12 (there are only 10 users!)');
 // 404
-__;
+fetchUserById(12)
+  .then(contactInfo)
+  .then((contactInfo) => log(contactInfo))
+  .catch(handleError);
 
 log('= = = =  the call stack is empty  = = = =');

@@ -8,26 +8,26 @@ import { ORIGIN } from '../config.js';
  * @returns {Promise<array>} A promise that resolves to an array of todos.
  * @throws {Error} HTTP error! status: {number}
  */
-export const todosByCompleted = async () => {
-    // --- declare your resource's URL ---
-    // use params to fetch only the todos you need
-    const URL = _;
+export const todosByCompleted = async (completed) => {
+  // --- declare your resource's URL ---
+  // use params to fetch only the todos you need
+  const URL = `${ORIGIN}/todos?completed=${completed}`;
 
-    // --- fetch the API data (this works!) ---
-    const encodedURL = encodeURI(URL);
-    const response = await fetch(encodedURL);
+  // --- fetch the API data (this works!) ---
+  const encodedURL = encodeURI(URL);
+  const response = await fetch(encodedURL);
 
-    // --- throw an error if the response is not ok (this works!) ---
-    if (!response.ok) {
-        const message = response.statusText
-            ? `${response.status}: ${response.statusText}\n-> ${URL}`
-            : `HTTP error! status: ${response.status}\n-> ${URL}`;
-        throw new Error(message);
-    }
+  // --- throw an error if the response is not ok (this works!) ---
+  if (!response.ok) {
+    const message = response.statusText
+      ? `${response.status}: ${response.statusText}\n-> ${URL}`
+      : `HTTP error! status: ${response.status}\n-> ${URL}`;
+    throw new Error(message);
+  }
 
-    /* --- parse the data if the response was ok (this works!) ---*/
-    const data = await response.json();
+  /* --- parse the data if the response was ok (this works!) ---*/
+  const data = await response.json();
 
-    // --- return the data ---
-    return data;
+  // --- return the data ---
+  return data;
 };

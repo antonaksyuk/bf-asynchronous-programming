@@ -23,10 +23,10 @@ const exercise3_cb_3 = () => {
     log('cb 3:', test);
     console.assert(test, 'x should be "whaaaa!');
 };
-setTimeout(exercise3_cb_3, 200);
+setTimeout(exercise3_cb_3, 900);
 
 const exercise3_cb_4 = () => {
-    intervalId; // clear something
+    clearInterval(intervalId); // clear something
     x += '!';
     log('cb 4:', x);
 };
